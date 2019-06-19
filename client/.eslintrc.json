@@ -6,5 +6,9 @@
       "react/prefer-stateless-function": "off",
       "no-unused-vars": ["error", { "args": "none" }],
       "import/extensions": "ignorePackages"
+    },
+    "env": {
+      "browser": true,
+      "node": true
     }
 }
