@@ -19,6 +19,7 @@
     "@types/turf": "^3.5.32",
     "@types/uuid": "^3.4.4",
     "eslint": "^5.16.0",
+    "ts-node": "^8.3.0",
     "typescript": "^3.3.1"
   },
   "scripts": {
