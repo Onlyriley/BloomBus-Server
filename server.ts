@@ -6,10 +6,9 @@ import * as admin from 'firebase-admin';
 import * as multer from 'multer';
 import * as _ from 'lodash';
 const upload = multer({ storage: multer.memoryStorage() });
-import { default as serviceAccount } from './serviceAccountKey';
 
 // Import types
-import ShuttleRun  from './interfaces/ShuttleRun';
+import ShuttleRun from './interfaces/ShuttleRun';
 import IConstants from './interfaces/IConstants';
 
 // Import functions
@@ -22,7 +21,7 @@ import * as campusRunPoints from './raw_data/campus_run1.gpx.json';
 
 async function start() {
   admin.initializeApp({
-    credential: admin.credential.cert(serviceAccount as Object),
+    credential: admin.credential.applicationDefault(),
     databaseURL: 'https://bloombus-163620.firebaseio.com'
   });
 
@@ -33,15 +32,15 @@ async function start() {
   const stopsRef = db.ref('stops');
 
   await constantsRef.once('value', (dataSnapshot: admin.database.DataSnapshot) => {
-    const   { reapShuttleThresholdMilliseconds, stopProximityThresholdMeters } = dataSnapshot.val() as IConstants;
+    const { reapShuttleThresholdMilliseconds, stopProximityThresholdMeters } = dataSnapshot.val() as IConstants;
     const campusRun = {
       name: 'Campus Loop',
       key: 'campus',
-      points: campusRunPoints,
-    }
-    const runs: Array<ShuttleRun> = [ campusRun ];
+      points: campusRunPoints
+    };
+    const runs: Array<ShuttleRun> = [campusRun];
     simulateRuns(runs, shuttlesRef);
-  
+
     shuttlesRef.on('value', () => {
       reapOldShuttles(shuttlesRef, reapShuttleThresholdMilliseconds);
       // DEPRECATED triggerStationProximity(shuttlesRef);
@@ -57,13 +56,13 @@ async function start() {
 
   app.get('/api/download/stops/geojson', (req, res) => {
     console.log('GET: /api/download/stops/geojson');
-    stopsRef.once('value', (stopsSnapshot) => {
+    stopsRef.once('value', stopsSnapshot => {
       const date = new Date();
       const filename = `stops-${date.toISOString().substr(0, 10)}.geojson`;
       const downloadPath = path.join(__dirname, 'downloads', filename);
       const stopsMutatedGeoJSON = stopsSnapshot.val();
       const stopsProperGeoJSON = {
-        type: "FeatureCollection",
+        type: 'FeatureCollection',
         features: []
       };
       _.forEach(stopsMutatedGeoJSON, (value: any, key) => {
@@ -78,8 +77,8 @@ async function start() {
   });
 
   app.get('/api/download/loops/geojson', (req, res) => {
-    console.log('GET: /api/download/loops/geojson')
-    loopsRef.once('value', (stopsSnapshot) => {
+    console.log('GET: /api/download/loops/geojson');
+    loopsRef.once('value', stopsSnapshot => {
       const date = new Date();
       const filename = `loops-${date.toISOString().substr(0, 10)}.geojson`;
       const downloadPath = path.join(__dirname, 'downloads', filename);
@@ -93,10 +92,10 @@ async function start() {
     console.log('POST: /api/upload/stops/geojson');
     const stopsProperGeoJSON = stripUnneccessaryGeoJSON(JSON.parse(req.file.buffer.toString()));
     let stopsMutatedGeoJSON = {};
-    stopsProperGeoJSON.features.forEach((feature) => {
+    stopsProperGeoJSON.features.forEach(feature => {
       stopsMutatedGeoJSON[feature.properties.stopKey] = feature;
     });
-    stopsRef.set(stopsMutatedGeoJSON, (error) => {
+    stopsRef.set(stopsMutatedGeoJSON, error => {
       if (error) {
         console.log(`ERROR: ${error}`);
         res.sendStatus(500);
@@ -110,7 +109,7 @@ async function start() {
   app.post('/api/upload/loops/geojson', upload.single('loops-geojson'), (req, res, next) => {
     console.log('POST: /api/upload/loops/geojson');
     const loopsGeoJSON = stripUnneccessaryGeoJSON(JSON.parse(req.file.buffer.toString()));
-    loopsRef.set(loopsGeoJSON, (error) => {
+    loopsRef.set(loopsGeoJSON, error => {
       if (error) {
         console.log(`ERROR: ${error}`);
         res.sendStatus(500);
@@ -124,10 +123,10 @@ async function start() {
   app.listen(process.env.PORT || 8080);
 }
 
-const stripUnneccessaryGeoJSON = (geoJSON) => {
+const stripUnneccessaryGeoJSON = geoJSON => {
   if (geoJSON.name) delete geoJSON.name;
   if (geoJSON.crs) delete geoJSON.crs;
   return geoJSON;
-}
+};
 
 start();

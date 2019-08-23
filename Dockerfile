@@ -13,6 +13,8 @@ COPY package*.json ./
 RUN npm install
 RUN npm build
 
+ENV GOOGLE_APPLICATION_CREDENTIALS="/etc/serviceAccountKey.json"
+
 # Bundle app source
 COPY . .
 

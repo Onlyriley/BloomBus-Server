@@ -27,7 +27,7 @@ steps:
       - name: dockersock
         path: /var/run/docker.sock
       - name: serviceAccountKey
-        path: /usr/src/app/serviceAccountKey.ts
+        path: /etc/serviceAccountKey.json
     when:
       event:
         - push
@@ -55,4 +55,4 @@ volumes:
       path: /var/run/docker.sock
   - name: serviceAccountKey
     host:
-      path: /etc/serviceAccountKey.ts
+      path: /etc/serviceAccountKey.json
