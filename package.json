@@ -2,7 +2,7 @@
   "name": "bloombus-server",
   "version": "1.0.0",
   "description": "",
-  "main": "index.ts",
+  "main": "server.ts",
   "dependencies": {
     "@material-ui/core": "^4.2.1",
     "@turf/turf": "^5.1.6",
