@@ -22,7 +22,7 @@ steps:
     commands:
       - docker pull jgibson02/bloombus-server
       - docker rm -f server || true
-      - docker run -d --name server --network="web" -l traefik.enable=true -l traefik.frontend.rule=Host:server.bloombus.mads.bloomu.xyz -l traefik.docker.network=web -l traefik.port=8080 jgibson02/bloombus-server
+      - docker run -d --name server --network="web" -l traefik.enable=true -l traefik.frontend.rule=Host:server.bloombus.mads.bloomu.edu -l traefik.docker.network=web -l traefik.port=8080 jgibson02/bloombus-server
     volumes:
       - name: dockersock
         path: /var/run/docker.sock
