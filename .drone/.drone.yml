@@ -1,0 +1,54 @@
+kind: pipeline
+name: server
+
+steps:
+  - name: docker
+    image: plugins/docker
+    settings:
+      repo: jgibson02/bloombus-server
+      auto_tag: true
+      username:
+        from_secret: docker_username
+      password:
+        from_secret: docker_password
+    when:
+      event:
+        - push
+      branch:
+        - master
+
+  - name: deploy
+    image: docker
+    commands:
+      - docker pull jgibson02/bloombus-server
+      - docker stop server
+      - docker rm server
+      - docker run -d --name server --network="web" -l traefik.enable=true -l traefik.frontend.rule=Host:server.bloombus.mads.bloomu.xyz -l traefik.docker.network=web -l traefik.port=5000 jgibson02/bloombus-server
+    volumes:
+      - name: dockersock
+        path: /var/run/docker.sock
+    when:
+      event:
+        - push
+      branch:
+        - master
+
+  - name: discord
+    image: appleboy/drone-discord
+    settings:
+      webhook_id:
+        from_secret: discord_webhook_id
+      webhook_token:
+        from_secret: discord_webhook_token
+      message: Drone build completed.
+
+trigger:
+  event:
+    - push
+    - pull_request
+    - tag
+
+volumes:
+  - name: dockersock
+    host:
+      path: /var/run/docker.sock
