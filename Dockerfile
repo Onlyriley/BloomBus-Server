@@ -11,12 +11,14 @@ COPY package*.json ./
 # RUN npm install
 # If you are building your code for production
 RUN npm install
-RUN npm run-script build
-
-ENV GOOGLE_APPLICATION_CREDENTIALS="/etc/serviceAccountKey.json"
 
 # Bundle app source
 COPY . .
+
+# Convert typescript file to vanilla JS
+RUN npm run-script build
+
+ENV GOOGLE_APPLICATION_CREDENTIALS="/etc/serviceAccountKey.json"
 
 EXPOSE 8080
 CMD [ "npm", "start" ]
