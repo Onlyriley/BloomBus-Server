@@ -31,7 +31,7 @@ export default async function triggerStationProximity(shuttlesRef: admin.databas
         Object.keys(shuttleLoop.properties.stops).forEach((stopKey, stopIndex) => { // Iterate over each loop object, destructuring its 'features' array
           const stop = stops[stopKey];
           const stationPoint = turf.point([stop.geometry.coordinates[0], stop.geometry.coordinates[1]]);
-          if (turf.distance(shuttlePoint, stationPoint, 'kilometers') <= 0.015) {
+          if (turf.distance(shuttlePoint, stationPoint, { units: 'kilometers' }) <= 0.015) {
             // shuttleSnap.key: the UUID
             // Setting the object entry to null will delete it in Firebase
             shuttle.properties.prevStation = stop;
