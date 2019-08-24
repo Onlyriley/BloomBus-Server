@@ -1,9 +1,9 @@
 // Import requirements
-import * as express from 'express';
+import express from 'express';
 import * as fs from 'fs';
 import * as path from 'path';
 import * as admin from 'firebase-admin';
-import * as multer from 'multer';
+import multer from 'multer';
 import * as _ from 'lodash';
 const upload = multer({ storage: multer.memoryStorage() });
 

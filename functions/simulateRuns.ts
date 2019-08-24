@@ -1,5 +1,5 @@
 import * as admin from "firebase-admin";
-import * as uuidv4 from "uuid/v4";
+import uuidv4 from "uuid/v4";
 import ShuttleRun from "../interfaces/ShuttleRun";
 import * as turf from "@turf/turf";
 
