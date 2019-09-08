@@ -18,6 +18,13 @@ COPY . .
 # Convert typescript file to vanilla JS
 RUN npm run-script build
 
+# Build webapp
+WORKDIR /usr/src/app/webapp/
+RUN npm install
+RUN npm run-script build
+
+WORKDIR /usr/src/app
+
 ENV GOOGLE_APPLICATION_CREDENTIALS="/etc/serviceAccountKey.json"
 
 EXPOSE 8080

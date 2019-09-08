@@ -5,10 +5,10 @@ import {
 
 import logo from '../bloombus-text-logo.svg';
 
-import Task from './Task.jsx';
-import Index from './Index.jsx';
-import EditGeometry from './EditGeometry.jsx';
-import PostStatusAlert from './PostStatusAlert.jsx';
+import Task from './Task';
+import Index from './Index';
+import EditGeometry from './EditGeometry';
+import PostStatusAlert from './PostStatusAlert';
 
 const tasks = [
   {

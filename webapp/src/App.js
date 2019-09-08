@@ -5,9 +5,9 @@ import {
 
 import './App.scss';
 
-import ProtectedRoute from './components/ProtectedRoute.jsx';
-import LoginScreen from './components/LoginScreen.jsx';
-import AdminDashboard from './components/AdminDashboard.jsx';
+import ProtectedRoute from './components/ProtectedRoute';
+import LoginScreen from './components/LoginScreen';
+import AdminDashboard from './components/AdminDashboard';
 import FirebaseAuthProvider from './components/FirebaseAuthContext';
 
 class App extends Component {

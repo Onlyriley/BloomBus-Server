@@ -1,7 +1,7 @@
 import React, { Component, Fragment } from 'react';
 import { withRouter } from 'react-router-dom';
 
-import Firebase from '../Firebase.js';
+import Firebase from '../Firebase';
 
 class LoginScreen extends Component {
   constructor(props) {
