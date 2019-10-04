@@ -33,13 +33,13 @@ async function start() {
 
   await constantsRef.once('value', (dataSnapshot: admin.database.DataSnapshot) => {
     const { reapShuttleThresholdMilliseconds, stopProximityThresholdMeters } = dataSnapshot.val() as IConstants;
-    const campusRun = {
-      name: 'Campus Loop',
-      key: 'campus',
-      points: campusRunPoints
-    };
-    const runs: Array<ShuttleRun> = [campusRun];
-    simulateRuns(runs, shuttlesRef);
+    // const campusRun = {
+    //   name: 'Campus Loop',
+    //   key: 'campus',
+    //   points: campusRunPoints
+    // };
+    // const runs: Array<ShuttleRun> = [campusRun];
+    // simulateRuns(runs, shuttlesRef);
 
     shuttlesRef.on('value', () => {
       reapOldShuttles(shuttlesRef, reapShuttleThresholdMilliseconds);
