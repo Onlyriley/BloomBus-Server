@@ -1,5 +1,5 @@
 {
-  "name": "client",
+  "name": "bloombus-server-admin",
   "version": "0.1.0",
   "private": true,
   "dependencies": {

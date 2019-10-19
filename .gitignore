@@ -72,5 +72,9 @@ typings/
 # Serverless directories
 .serverless
 
+# Downloaded/uploaded JSON from server API
+/downloads
+/out
+
 serviceAccountKey.js
 serviceAccountKey.ts

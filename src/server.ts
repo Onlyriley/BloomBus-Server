@@ -8,16 +8,16 @@ import * as _ from 'lodash';
 const upload = multer({ storage: multer.memoryStorage() });
 
 // Import types
-import ShuttleRun from './interfaces/ShuttleRun';
+// import ShuttleRun from './interfaces/ShuttleRun';
 import IConstants from './interfaces/IConstants';
 
 // Import functions
-import simulateRuns from './functions/simulateRuns';
+// import simulateRuns from './functions/simulateRuns';
 import reapOldShuttles from './functions/reapOldShuttles';
-import triggerStationProximity from './functions/triggerStationProximity';
+// import triggerStationProximity from './functions/triggerStationProximity';
 
 // Import raw data
-import * as campusRunPoints from './raw_data/campus_run1.gpx.json';
+// import * as campusRunPoints from './raw_data/campus_run1.gpx.json';
 
 async function start() {
   admin.initializeApp({
@@ -48,10 +48,15 @@ async function start() {
   });
 
   const app = express();
-  app.use(express.static(path.join(__dirname, 'webapp', 'build')));
+
+  // Paths
+  const webappRoot = path.join(__dirname, '..', 'webapp', 'build');
+  const downloadsDir = path.join(__dirname, '..', 'downloads');
+
+  app.use(express.static(webappRoot));
 
   app.get('/', (req, res) => {
-    res.sendFile(path.join(__dirname, 'build', 'index.html'));
+    res.sendFile(path.join(webappRoot, 'index.html'));
   });
 
   app.get('/api/download/stops/geojson', (req, res) => {
@@ -59,7 +64,7 @@ async function start() {
     stopsRef.once('value', stopsSnapshot => {
       const date = new Date();
       const filename = `stops-${date.toISOString().substr(0, 10)}.geojson`;
-      const downloadPath = path.join(__dirname, 'downloads', filename);
+      const downloadPath = path.join(downloadsDir, filename);
       const stopsMutatedGeoJSON = stopsSnapshot.val();
       const stopsProperGeoJSON = {
         type: 'FeatureCollection',
@@ -81,7 +86,7 @@ async function start() {
     loopsRef.once('value', stopsSnapshot => {
       const date = new Date();
       const filename = `loops-${date.toISOString().substr(0, 10)}.geojson`;
-      const downloadPath = path.join(__dirname, 'downloads', filename);
+      const downloadPath = path.join(downloadsDir, filename);
       fs.writeFileSync(downloadPath, JSON.stringify(stopsSnapshot.val()));
       res.status(200);
       res.sendFile(downloadPath);

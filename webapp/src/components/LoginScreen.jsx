@@ -9,7 +9,7 @@ class LoginScreen extends Component {
 
     this.state = {
       email: 'acmbloomsburg@gmail.com',
-      password: 'Thisisapassword',
+      password: 'Thisisapassword'
     };
 
     this.onEmailInputChange = this.onEmailInputChange.bind(this);
@@ -37,10 +37,12 @@ class LoginScreen extends Component {
   render() {
     return (
       <Fragment>
-        <h1>I'm a login screen.</h1>
+        <h1>Login:</h1>
         <input type="text" value={this.state.email} onChange={this.onEmailInputChange} />
         <input type="password" value={this.state.password} onChange={this.onPasswordInputChange} />
-        <button type="submit" onClick={this.onSubmit}>Submit</button>
+        <button type="submit" onClick={this.onSubmit}>
+          Submit
+        </button>
       </Fragment>
     );
   }
