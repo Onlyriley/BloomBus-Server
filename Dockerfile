@@ -1,4 +1,4 @@
-FROM node:10
+FROM node:12
 
 # Create app directory
 WORKDIR /usr/src/app
@@ -16,12 +16,12 @@ RUN npm install
 COPY . .
 
 # Convert typescript file to vanilla JS
-RUN npm run-script build
+# RUN npm run build
 
 # Build webapp
 WORKDIR /usr/src/app/webapp/
 RUN npm install
-RUN npm run-script build
+RUN npm run build
 
 WORKDIR /usr/src/app
 
