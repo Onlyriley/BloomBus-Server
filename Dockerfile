@@ -1,9 +1,7 @@
-FROM node:12
+FROM node:lts
 
 # Create app directory
 WORKDIR /usr/src/app
-
-ENTRYPOINT [ "npm", "start" ]
 
 # Install app dependencies
 # A wildcard is used to ensure both package.json AND package-lock.json are copied
@@ -30,4 +28,5 @@ WORKDIR /usr/src/app
 ENV GOOGLE_APPLICATION_CREDENTIALS="/etc/serviceAccountKey.json"
 
 EXPOSE 8080
+
 CMD [ "npm", "start" ]
