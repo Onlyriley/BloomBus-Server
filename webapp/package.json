@@ -3,17 +3,16 @@
   "version": "0.1.0",
   "private": true,
   "dependencies": {
-    "@material-ui/core": "^4.0.0",
+    "@material-ui/core": "^4.9.3",
     "file-saver": "^2.0.2",
-    "firebase": "^6.0.2",
-    "node-sass": "^4.12.0",
+    "firebase": "^7.8.2",
+    "node-sass": "^4.13.1",
     "prop-types": "^15.7.2",
-    "react": "^16.8.6",
-    "react-dom": "^16.8.6",
-    "react-eva-icons": "0.0.7",
-    "react-router": "^5.0.0",
-    "react-router-dom": "^5.0.0",
-    "react-scripts": "3.0.1"
+    "react": "^16.12.0",
+    "react-dom": "^16.12.0",
+    "react-eva-icons": "0.0.8",
+    "react-router-dom": "^5.1.2",
+    "react-scripts": "3.4.0"
   },
   "scripts": {
     "start": "react-scripts start",
