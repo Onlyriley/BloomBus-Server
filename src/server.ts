@@ -1,10 +1,12 @@
 // Import requirements
-import express from 'express';
+import { Express } from 'express';
 import * as fs from 'fs';
 import * as path from 'path';
 import * as admin from 'firebase-admin';
-import multer from 'multer';
 import * as _ from 'lodash';
+
+const express = require('express');
+const multer = require('multer');
 const upload = multer({ storage: multer.memoryStorage() });
 
 // Import types
@@ -47,7 +49,7 @@ async function start() {
     });
   });
 
-  const app = express();
+  const app: Express = express();
 
   // Paths
   const webappRoot = path.join(__dirname, '..', 'webapp', 'build');
