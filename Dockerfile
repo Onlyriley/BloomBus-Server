@@ -1,4 +1,6 @@
-FROM node:12
+# This Dockerfile is not optimized, all node_modules and sourcefiles included
+
+FROM node:lts
 
 # Create app directory
 WORKDIR /usr/src/app
@@ -28,4 +30,5 @@ WORKDIR /usr/src/app
 ENV GOOGLE_APPLICATION_CREDENTIALS="/etc/serviceAccountKey.json"
 
 EXPOSE 8080
+
 CMD [ "npm", "start" ]
