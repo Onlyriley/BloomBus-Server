@@ -16,10 +16,12 @@ export default class FirebaseAuthProvider extends Component {
   }
 
   componentDidMount() {
-    Firebase.auth().onAuthStateChanged(user => this.setState({
-      authStatusReported: true,
-      isUserSignedIn: !!user,
-    }));
+    Firebase.auth().onAuthStateChanged((user) =>
+      this.setState({
+        authStatusReported: true,
+        isUserSignedIn: !!user,
+      })
+    );
   }
 
   render() {

@@ -1,7 +1,5 @@
 import React, { Component } from 'react';
-import {
-  Route, Switch, NavLink, withRouter,
-} from 'react-router-dom';
+import { Route, Switch, NavLink, withRouter } from 'react-router-dom';
 
 import logo from '../bloombus-text-logo.svg';
 
@@ -36,7 +34,7 @@ class AdminDashboard extends Component {
           <span className="App-nav__heading">Tasks</span>
           <ul>
             {/* https://github.com/ReactTraining/react-router/issues/6201 */}
-            {tasks.map(task => (
+            {tasks.map((task) => (
               <li key={task.path}>
                 <NavLink to={`/admin-dashboard${task.path}`} isActive={isActive.bind(this, task.path)}>
                   {task.displayText}
@@ -48,7 +46,9 @@ class AdminDashboard extends Component {
         <Task>
           <Switch>
             <Route exact path="/admin-dashboard" component={Index} />
-            {tasks.map(task => <Route key={task.path} path={`/admin-dashboard${task.path}`} component={task.component} />)}
+            {tasks.map((task) => (
+              <Route key={task.path} path={`/admin-dashboard${task.path}`} component={task.component} />
+            ))}
           </Switch>
         </Task>
       </div>

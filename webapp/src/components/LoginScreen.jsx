@@ -9,7 +9,7 @@ class LoginScreen extends Component {
 
     this.state = {
       email: 'acmbloomsburg@gmail.com',
-      password: 'Thisisapassword'
+      password: 'Thisisapassword',
     };
 
     this.onEmailInputChange = this.onEmailInputChange.bind(this);

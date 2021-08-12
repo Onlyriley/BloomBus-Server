@@ -8,14 +8,12 @@ class ProtectedRoute extends Component {
     const { component: Component, ...props } = this.props;
     return (
       <FirebaseAuthContext.Consumer>
-        {
-          ({ isUserSignedIn }) => {
-            if (isUserSignedIn) {
-              return <Component {...props} />;
-            }
-            return <Redirect to="/login" />;
+        {({ isUserSignedIn }) => {
+          if (isUserSignedIn) {
+            return <Component {...props} />;
           }
-        }
+          return <Redirect to="/login" />;
+        }}
       </FirebaseAuthContext.Consumer>
     );
   }

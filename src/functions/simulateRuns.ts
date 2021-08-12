@@ -1,12 +1,12 @@
 import * as admin from 'firebase-admin';
 import uuidv4 from 'uuid/v4';
-import ShuttleRun from '../interfaces/ShuttleRun';
+import { ShuttleRun } from '../interfaces/ShuttleRun';
 import * as turf from '@turf/turf';
 
 export default function simulateRuns(runs: Array<ShuttleRun>, dbRef: admin.database.Reference) {
   const uuid = uuidv4();
   const shuttleRef = dbRef.child(uuid); // Create a new child node with this uuid
-  shuttleRef.onDisconnect().remove(err => {
+  shuttleRef.onDisconnect().remove((err) => {
     if (err) console.error(err);
   }); // Set reference to self-destruct on disconnect
 
@@ -23,7 +23,7 @@ export default function simulateRuns(runs: Array<ShuttleRun>, dbRef: admin.datab
       const geoJSON = {
         type: 'Feature',
         geometry: {
-          coordinates: shuttlePointCoords
+          coordinates: shuttlePointCoords,
         },
         properties: {
           appVersion: 'bloombus-server',
@@ -32,8 +32,8 @@ export default function simulateRuns(runs: Array<ShuttleRun>, dbRef: admin.datab
           speed: shuttlePoint['Speed(mph)'],
           loopDisplayName: shuttleRun.name,
           loopKey: shuttleRun.key,
-          timestamp: Date.now()
-        }
+          timestamp: Date.now(),
+        },
       };
       shuttleRef.set(geoJSON);
 

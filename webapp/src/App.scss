@@ -1,7 +1,7 @@
 @import './globals';
 
 // Overrides
-i[class^="eva"] {
+i[class^='eva'] {
   display: flex;
 }
 
@@ -11,8 +11,8 @@ i[class^="eva"] {
 
   display: grid;
   grid-template-areas:
-    "header header"
-    "nav main";
+    'header header'
+    'nav main';
   grid-template-rows: 3.5rem 1fr;
   grid-template-columns: 17rem 1fr;
 }
@@ -31,7 +31,7 @@ i[class^="eva"] {
   font-size: calc(10px + 2vmin);
   color: $bloombus-gray;
   grid-area: header;
-  box-shadow: 0 0 2px rgba(0,0,0,0.1);
+  box-shadow: 0 0 2px rgba(0, 0, 0, 0.1);
   z-index: 900;
 
   &__title {

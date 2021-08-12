@@ -8,12 +8,13 @@
     "@turf/turf": "^5.1.6",
     "@types/express": "^4.17.2",
     "@types/multer": "^1.4.2",
-    "@types/node": "^12.12.27",
+    "@types/node": "^12.20.19",
     "@types/uuid": "^3.4.7",
+    "dotenv": "^10.0.0",
     "eslint": "^5.16.0",
     "express": "^4.17.1",
-    "firebase": "^7.8.2",
-    "firebase-admin": "^8.9.2",
+    "firebase": "^8.9.1",
+    "firebase-admin": "^9.11.0",
     "firebase-functions": "^3.3.0",
     "lodash": "^4.17.15",
     "multer": "^1.4.2",
@@ -34,5 +35,8 @@
   "bugs": {
     "url": "https://github.com/jgibson02/BloomBus-Server/issues"
   },
-  "homepage": "https://github.com/jgibson02/BloomBus-Server#readme"
+  "homepage": "https://github.com/jgibson02/BloomBus-Server#readme",
+  "devDependencies": {
+    "prettier": "^2.3.2"
+  }
 }

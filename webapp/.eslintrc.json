@@ -1,14 +1,14 @@
 {
-    "extends": "airbnb",
-    "rules": {
-      "linebreak-style": "off",
-      "react/destructuring-assignment": [ false ],
-      "react/prefer-stateless-function": "off",
-      "no-unused-vars": ["error", { "args": "none" }],
-      "import/extensions": "ignorePackages"
-    },
-    "env": {
-      "browser": true,
-      "node": true
-    }
+  "extends": "airbnb",
+  "rules": {
+    "linebreak-style": "off",
+    "react/destructuring-assignment": [false],
+    "react/prefer-stateless-function": "off",
+    "no-unused-vars": ["error", { "args": "none" }],
+    "import/extensions": "ignorePackages"
+  },
+  "env": {
+    "browser": true,
+    "node": true
+  }
 }
