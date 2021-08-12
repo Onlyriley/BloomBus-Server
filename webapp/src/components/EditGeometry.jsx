@@ -29,18 +29,22 @@ class EditGeometry extends Component {
 
   onDownloadStopsClick(event) {
     this.setState({ fetching: true });
-    fetch('/api/download/stops/geojson').then(response => response.blob()).then((blob) => {
-      this.setState({ fetching: false });
-      saveAs(blob, `stops-${(new Date()).toISOString().substr(0, 10)}.geojson`);
-    });
+    fetch('/api/download/stops/geojson')
+      .then((response) => response.blob())
+      .then((blob) => {
+        this.setState({ fetching: false });
+        saveAs(blob, `stops-${new Date().toISOString().substr(0, 10)}.geojson`);
+      });
   }
 
   onDownloadLoopsClick(event) {
     this.setState({ fetching: true });
-    fetch('/api/download/loops/geojson').then(response => response.blob()).then((blob) => {
-      this.setState({ fetching: false });
-      saveAs(blob, `loops-${(new Date()).toISOString().substr(0, 10)}-.geojson`);
-    });
+    fetch('/api/download/loops/geojson')
+      .then((response) => response.blob())
+      .then((blob) => {
+        this.setState({ fetching: false });
+        saveAs(blob, `loops-${new Date().toISOString().substr(0, 10)}-.geojson`);
+      });
   }
 
   onUploadStopsClick(event) {
@@ -94,161 +98,103 @@ class EditGeometry extends Component {
       <Fragment>
         <h1 className="Task__heading">Edit Geometry</h1>
         <Button variant="contained" onClick={this.onDownloadStopsClick}>
-          <Icon
-            name="download"
-            fill="#000"
-            size="large"
-          />
+          <Icon name="download" fill="#000" size="large" />
           <span style={{ marginLeft: '0.5rem' }}>Download Stops GeoJSON</span>
         </Button>
         <Button variant="contained" onClick={this.onDownloadLoopsClick}>
-          <Icon
-            name="download"
-            fill="#000"
-            size="large"
-          />
+          <Icon name="download" fill="#000" size="large" />
           <span style={{ marginLeft: '0.5rem' }}>Download Loops GeoJSON</span>
         </Button>
-        {
-          this.state.showStopsUpload ? (
-            <form onSubmit={this.onUploadStopsSubmit}>
-              <span style={{ display: 'flex', flexDirection: 'row' }}>
-                <Input
-                  inputProps={{
-                    accept: '.geojson',
-                    type: 'file',
-                    name: 'stops-geojson',
-                  }}
-                  inputRef={this.stopsUploadInput}
-                />
-                <Tooltip title="Submit">
-                  <IconButton
-                    key="check"
-                    aria-label="Submit"
-                    color="inherit"
-                    size="small"
-                    type="submit"
-                  >
-                    <Icon
-                      name="checkmark"
-                      size="xlarge"
-                      fill="#000"
-                    />
-                  </IconButton>
-                </Tooltip>
-                <Tooltip title="Cancel">
-                  <IconButton
-                    key="close"
-                    aria-label="Cancel"
-                    color="inherit"
-                    size="small"
-                    onClick={this.onUploadStopsCancel}
-                  >
-                    <Icon
-                      name="close"
-                      size="xlarge"
-                      fill="#000"
-                    />
-                  </IconButton>
-                </Tooltip>
-              </span>
-            </form>
-          ) : (
-            <Button variant="contained" onClick={this.onUploadStopsClick}>
-              <Icon
-                name="upload"
-                fill="#000"
-                size="large"
+        {this.state.showStopsUpload ? (
+          <form onSubmit={this.onUploadStopsSubmit}>
+            <span style={{ display: 'flex', flexDirection: 'row' }}>
+              <Input
+                inputProps={{
+                  accept: '.geojson',
+                  type: 'file',
+                  name: 'stops-geojson',
+                }}
+                inputRef={this.stopsUploadInput}
               />
-              <span style={{ marginLeft: '0.5rem' }}>Upload Stops GeoJSON</span>
-            </Button>
-          )
-        }
-        {
-          this.state.showLoopsUpload ? (
-            <form onSubmit={this.onUploadLoopsSubmit}>
-              <span style={{ display: 'flex', flexDirection: 'row' }}>
-                <Input
-                  inputProps={{
-                    accept: '.geojson',
-                    type: 'file',
-                    name: 'loops-geojson',
-                  }}
-                  inputRef={this.loopsUploadInput}
-                />
-                <Tooltip title="Submit">
-                  <IconButton
-                    key="check"
-                    aria-label="Submit"
-                    color="inherit"
-                    size="small"
-                    onClick={this.onUploadLoopsSubmit}
-                  >
-                    <Icon
-                      name="checkmark"
-                      size="xlarge"
-                      fill="#000"
-                    />
-                  </IconButton>
-                </Tooltip>
-                <Tooltip title="Cancel">
-                  <IconButton
-                    key="close"
-                    aria-label="Cancel"
-                    color="inherit"
-                    size="small"
-                    type="submit"
-                  >
-                    <Icon
-                      name="close"
-                      size="xlarge"
-                      fill="#000"
-                    />
-                  </IconButton>
-                </Tooltip>
-              </span>
-            </form>
-
-          ) : (
-            <Button variant="contained" onClick={this.onUploadLoopsClick}>
-              <Icon
-                name="upload"
-                fill="#000"
-                size="large"
-              />
-              <span style={{ marginLeft: '0.5rem' }}>Upload Loops GeoJSON</span>
-            </Button>
-          )
-        }
-        {this.state.fetching
-          ? <CircularProgress />
-          : (
-            <Snackbar
-              anchorOrigin={{
-                vertical: 'bottom',
-                horizontal: 'left',
-              }}
-              autoHideDuration={6000}
-              ContentProps={{
-                'aria-describedby': 'message-id',
-              }}
-              message={<span id="message-id">Note archived</span>}
-              action={[
+              <Tooltip title="Submit">
+                <IconButton key="check" aria-label="Submit" color="inherit" size="small" type="submit">
+                  <Icon name="checkmark" size="xlarge" fill="#000" />
+                </IconButton>
+              </Tooltip>
+              <Tooltip title="Cancel">
                 <IconButton
                   key="close"
-                  aria-label="Close"
+                  aria-label="Cancel"
                   color="inherit"
+                  size="small"
+                  onClick={this.onUploadStopsCancel}
                 >
-                  <Icon
-                    name="close"
-                    size="medium"
-                    fill="#000"
-                  />
-                </IconButton>,
-              ]}
-            />
-          )
-        }
+                  <Icon name="close" size="xlarge" fill="#000" />
+                </IconButton>
+              </Tooltip>
+            </span>
+          </form>
+        ) : (
+          <Button variant="contained" onClick={this.onUploadStopsClick}>
+            <Icon name="upload" fill="#000" size="large" />
+            <span style={{ marginLeft: '0.5rem' }}>Upload Stops GeoJSON</span>
+          </Button>
+        )}
+        {this.state.showLoopsUpload ? (
+          <form onSubmit={this.onUploadLoopsSubmit}>
+            <span style={{ display: 'flex', flexDirection: 'row' }}>
+              <Input
+                inputProps={{
+                  accept: '.geojson',
+                  type: 'file',
+                  name: 'loops-geojson',
+                }}
+                inputRef={this.loopsUploadInput}
+              />
+              <Tooltip title="Submit">
+                <IconButton
+                  key="check"
+                  aria-label="Submit"
+                  color="inherit"
+                  size="small"
+                  onClick={this.onUploadLoopsSubmit}
+                >
+                  <Icon name="checkmark" size="xlarge" fill="#000" />
+                </IconButton>
+              </Tooltip>
+              <Tooltip title="Cancel">
+                <IconButton key="close" aria-label="Cancel" color="inherit" size="small" type="submit">
+                  <Icon name="close" size="xlarge" fill="#000" />
+                </IconButton>
+              </Tooltip>
+            </span>
+          </form>
+        ) : (
+          <Button variant="contained" onClick={this.onUploadLoopsClick}>
+            <Icon name="upload" fill="#000" size="large" />
+            <span style={{ marginLeft: '0.5rem' }}>Upload Loops GeoJSON</span>
+          </Button>
+        )}
+        {this.state.fetching ? (
+          <CircularProgress />
+        ) : (
+          <Snackbar
+            anchorOrigin={{
+              vertical: 'bottom',
+              horizontal: 'left',
+            }}
+            autoHideDuration={6000}
+            ContentProps={{
+              'aria-describedby': 'message-id',
+            }}
+            message={<span id="message-id">Note archived</span>}
+            action={[
+              <IconButton key="close" aria-label="Close" color="inherit">
+                <Icon name="close" size="medium" fill="#000" />
+              </IconButton>,
+            ]}
+          />
+        )}
       </Fragment>
     );
   }

@@ -78,3 +78,9 @@ typings/
 
 serviceAccountKey.js
 serviceAccountKey.ts
+
+# env
+.env
+
+# lib (tsc output)
+lib
