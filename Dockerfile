@@ -1,3 +1,5 @@
+# This Dockerfile is not optimized, all node_modules and sourcefiles included
+
 FROM node:lts
 
 # Create app directory
