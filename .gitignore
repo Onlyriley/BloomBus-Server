@@ -76,11 +76,12 @@ typings/
 /downloads
 /out
 
-serviceAccountKey.js
-serviceAccountKey.ts
+# serviceAccountKey
+serviceAccountKey.*
 
 # env
 .env
+!webapp/.env
 
 # lib (tsc output)
 lib

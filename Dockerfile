@@ -2,6 +2,13 @@
 
 FROM node:lts
 
+# Create ARG for credentials to bring in file path from build command. See README.
+ARG app_creds
+# Copy the credentials file into the image
+COPY ${app_creds} /etc/serviceAccountKey.json
+# Pass ARG to container
+ENV GOOGLE_APPLICATION_CREDENTIALS=/etc/serviceAccountKey.json
+
 # Create app directory
 WORKDIR /usr/src/app
 
@@ -25,10 +32,7 @@ WORKDIR /usr/src/app/webapp/
 RUN npm install
 RUN npm run build
 
+# Return to root and start
 WORKDIR /usr/src/app
-
-ENV GOOGLE_APPLICATION_CREDENTIALS="/etc/serviceAccountKey.json"
-
 EXPOSE 8080
-
 CMD [ "npm", "start" ]
