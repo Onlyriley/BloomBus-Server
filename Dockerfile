@@ -1,6 +1,6 @@
 # This Dockerfile is not optimized, all node_modules and sourcefiles included
 
-FROM node:lts
+FROM node:16.14.0
 
 # Create ARG for credentials to bring in file path from build command. See README.
 ARG app_creds
@@ -17,6 +17,8 @@ WORKDIR /usr/src/app
 # where available (npm@5+)
 COPY package*.json ./
 
+
+
 # RUN npm install
 # If you are building your code for production
 RUN npm install
@@ -29,8 +31,15 @@ COPY . .
 
 # Build webapp
 WORKDIR /usr/src/app/webapp/
-RUN npm install
-RUN npm run build
+
+
+RUN npx browserslist@latest --update-db
+
+
+RUN npm install --force
+
+
+RUN npm run build --force
 
 # Return to root and start
 WORKDIR /usr/src/app
